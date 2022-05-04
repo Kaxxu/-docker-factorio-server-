@@ -1,10 +1,12 @@
 FROM centos
-EXPOSE SED_PORT
 
 WORKDIR /opt/factorio
+
 COPY factorio/ .
-COPY server-settings.json ./bin/x64/server-settings.json
+COPY server-settings.json ./server-settings.json
 
-RUN ./bin/x64/factorio --create ./bin/x64/saves/SED_NAME.zip
+RUN ./bin/x64/factorio --create ./saves/factorio.tar.xz
 
-CMD ["./opt/factorio/bin/x64/factorio --start-server ./saves/SED_NAME.zip --server-settings ./opt/factorio/bin/x64/server-settings.json"]
+EXPOSE 34197
+
+ENTRYPOINT ["/bin/bash", "-l", "-c", "/opt/factorio/bin/x64/factorio --start-server /opt/factorio/saves/factorio.tar.zip --server-settings /opt/factorio/server-settings.json"]
