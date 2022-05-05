@@ -19,7 +19,7 @@ function build() {
 
 function run() {
   echo -e "\e[32mDocker Run\e[0m"
-  docker run -d -p $PORT:34197 $NAME
+  docker run -d -p 127.0.0.1:$PORT:34197/udp $NAME
   echo ""
 }
 
